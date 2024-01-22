@@ -1,9 +1,9 @@
-// server/api/disney.js
-
-export default async function handler(req, res) {
-    const response = await fetch('https://api.example.com/disney');
-    const data = await response.json();
-  
-    res.status(200).json(data);
+export default defineEventHandler((event) => {
+  async function getDisneyData() {
+    const res = await fetch("https://api.disneyapi.dev/character");
+    const disneyData = await res.json();
+    return disneyData;
   }
-  
+  const data = getDisneyData();
+  return data;
+});
